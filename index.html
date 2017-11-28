@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Enable Angular routing to use HTML 5 URLs -->
+    <base href="/">
+
+    <title>Aux2Couverts</title>
+
+   <style>
+        body {
+            font-family: 'Segoe UI Light', calibri, arial, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            background-color: orange;
+            color: white;
+        }
+    </style>
+
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="./systemjs.config.js"></script>
+
+    <script>
+        System.import('app');
+    </script>
+
+</head>
+<body>
+    <!--<osl-application>Loading...</osl-application>-->
+</body>
+</html>
