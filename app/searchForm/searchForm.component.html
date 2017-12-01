@@ -1,0 +1,17 @@
+<div>
+    <div class="form-group">
+        <label for="input_location">Location :</label>
+        <input id="input_location" class="form-control search_input" type="text" placeholder="ex:Paris" [(ngModel)]="inputLocation">
+    </div>
+    <div class="form-group">
+        <label for="input_tag">Tag :</label>
+        <input id="input_tag" class="form-control search_input" type="text" list="list_tag" placeholder="ex:French" [(ngModel)]="inputTag">
+        <datalist id="list_tag">
+            <option value="french">French</option>
+            <option value="chinese">Chinese</option>
+            <option value="french1">French1</option>
+            <option value="french2">French2</option>
+        </datalist>
+    </div>
+    <button id="button_search" class="btn btn-primary" (click)="getResult()">Search</button>
+</div>
