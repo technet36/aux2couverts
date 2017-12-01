@@ -15,13 +15,23 @@ var RestaurantHomeComponent = (function () {
     function RestaurantHomeComponent(restoService, route) {
         this.restoService = restoService;
         this.route = route;
+        this.tagsString = "";
     }
     RestaurantHomeComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.subscriberParams = this.route.params.subscribe(function (params) {
-            var id = +params['id']; // (+) converts string 'id' to a number
-            _this.resto = _this.restoService.getRestosById(id);
+        /*this.subscriberParams = this.route.params.subscribe(params => {
+            let id: number = +params['id'];   // (+) converts string 'id' to a number
+            this.resto = this.restoService.getRestosById(id);
+<<<<<<< HEAD
         });
+=======
+        });*/
+        this.restoServ = new restaurant_service_1.RestoService(); //Suppr Router
+        this.resto = this.restoServ.getRestosById(0); //Suppr Router
+        this.imageUrl = '/images/' + 0 + '.jpg';
+        for (var _i = 0, _a = this.resto.tag; _i < _a.length; _i++) {
+            var t = _a[_i];
+            this.tagsString += t + " * ";
+        }
     };
     RestaurantHomeComponent.prototype.ngOnDestroy = function () {
         this.subscriberParams.unsubscribe();

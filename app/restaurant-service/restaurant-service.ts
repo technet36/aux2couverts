@@ -4,10 +4,10 @@ export class Resto {
         public name: string,
         public lat: number,
         public long: number,
-        public adress: string,
+        public address: string,
         public city: string,
         public tag: Array<string>,
-        public menu: Array<string>,
+        public menu: Array<Array<string>>,
         public averagePrice: number,
         public averageScore: number) {}
 }
@@ -23,7 +23,7 @@ export class RestoService {
             "30 - 32 Parkgate St, Dublin 8, Co. Dublin, Ireland, Arran Quay",
             "Dublin",
             ["Irish","Gastropub"],
-            ["** Entrance ** \n Tomato\n** Dish **\n Beef with Fries\n** Desert **\n Banoffe\n","** Entrance ** \n Salad\n** Dish **\n Pork with Fries\n** Desert **\n Yogurt\n"],
+            [["Tomato","Beef with Fries","Banoffe"],["Salad","Pork with Fries","Yogurt"],["Salad","Pork with Fries","Yogurt"]],
             20.2,
             4.1),
           new Resto(
@@ -34,7 +34,7 @@ export class RestoService {
             "Church Ave, Blanchardstown",
             "Dublin",
             ["Classic"],
-            ["** Entrance ** \n Soup\n** Dish **\n Beans\n** Desert **\n Banoffe\n","** Entrance ** \n Salad\n** Dish **\n Pork with Fries\n** Desert **\n Yogurt\n"],
+            [["Soup","Beans","Banoffe"],["Salad","Pork with Fries","Yogurt"]],
             25.2,
             4.6),
           new Resto(
@@ -45,7 +45,7 @@ export class RestoService {
             "32 Washington St, Centre",
             "Cork",
             ["Classic"],
-            ["** Entrance ** \n Soup\n** Dish **\n Beans\n** Desert **\n Banoffe\n","** Entrance ** \n Salad\n** Dish **\n Pork with Fries\n** Desert **\n Yogurt\n"],
+            [["Soup","Beans","Banoffe"],["Salad","Pork with Fries","Yogurt"]],
             15.2,
             4.6),
 
