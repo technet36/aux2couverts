@@ -10,13 +10,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
+var restaurant_service_1 = require('../../restaurant-service/restaurant-service');
 var RestaurantHomeComponent = (function () {
-    function RestaurantHomeComponent(route) {
+    function RestaurantHomeComponent(restoService, route) {
+        this.restoService = restoService;
         this.route = route;
     }
     RestaurantHomeComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.subscriberParams = this.route.params.subscribe(function (params) {
             var id = +params['id']; // (+) converts string 'id' to a number
+            _this.resto = _this.restoService.getRestosById(id);
         });
     };
     RestaurantHomeComponent.prototype.ngOnDestroy = function () {
@@ -26,9 +30,10 @@ var RestaurantHomeComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'osl-restaurant-home',
-            templateUrl: 'restaurant-home.component.html'
+            templateUrl: 'restaurant-home.component.html',
+            providers: [restaurant_service_1.RestoService]
         }), 
-        __metadata('design:paramtypes', [router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [restaurant_service_1.RestoService, router_1.ActivatedRoute])
     ], RestaurantHomeComponent);
     return RestaurantHomeComponent;
 }());

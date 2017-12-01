@@ -12,8 +12,8 @@ export class Resto {
         public averageScore: number) {}
 }
 
-export class FilmService {
-    getFilms(): Array<Resto> {
+export class RestoService {
+    getRestaurants(): Array<Resto> {
         var restos: Array<Resto> = [
           new Resto(
             0,
@@ -53,7 +53,7 @@ export class FilmService {
         return restos;
     }
 
-    getRestoById(id: number): Resto {
-        return this.getFilms()[id];
+    getRestosById(id: number): Resto {
+      return this.getRestaurants()[id];
     }
 }
