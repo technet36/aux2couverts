@@ -29,7 +29,7 @@ export class SearchFormComponent implements OnInit {
                 if (!this.tags.includes(unTag)) this.tags.push(unTag);
             },this);
         },this);
-        console.log(this.mesResto);
+        //console.log(this.mesResto);
     }
 
     ngOnInit(): void {
@@ -37,8 +37,6 @@ export class SearchFormComponent implements OnInit {
     }
 
     getResult() {
-        console.log(this.inputTag);
-        console.log(this.inputLocation);
         let isSearch:boolean = false;
         this.results = [];
         this.mesResto.forEach(function (unResto) {

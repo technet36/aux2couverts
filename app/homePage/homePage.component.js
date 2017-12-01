@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var HomePageComponent = (function () {
     function HomePageComponent() {
-        console.log("homePage.ts");
+        //console.log("homePage.ts");
         //todo : init the map and the table
     }
     HomePageComponent = __decorate([

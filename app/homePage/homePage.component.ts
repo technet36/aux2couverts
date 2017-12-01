@@ -8,7 +8,7 @@ import {Component} from '@angular/core';
 })
 export default class HomePageComponent {
     constructor() {
-        console.log("homePage.ts");
+        //console.log("homePage.ts");
         //todo : init the map and the table
     }
 }

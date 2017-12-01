@@ -26,14 +26,12 @@ var SearchFormComponent = (function () {
                     this.tags.push(unTag);
             }, this);
         }, this);
-        console.log(this.mesResto);
+        //console.log(this.mesResto);
     }
     SearchFormComponent.prototype.ngOnInit = function () {
         //TableComponent.
     };
     SearchFormComponent.prototype.getResult = function () {
-        console.log(this.inputTag);
-        console.log(this.inputLocation);
         var isSearch = false;
         this.results = [];
         this.mesResto.forEach(function (unResto) {
