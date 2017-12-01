@@ -2,29 +2,58 @@ export class Resto {
     constructor(
         public id: number,
         public name: string,
-        public priceMeans: number,
-        public score: number,
-        public genres: Array<string>) {
-    }
+        public lat: number,
+        public long: number,
+        public adress: string,
+        public city: string,
+        public tag: Array<string>,
+        public menu: Array<string>,
+        public averagePrice: number,
+        public averageScore: number) {}
 }
 
-/*export class FilmService {
-    getFilms(): Array<Film> {
-        var films: Array<Film> = [
-            new Film(0, 'Spectre', 'Bond is back in a frantic battle against his classic foe and his white cat', 8.99, 4.9, ['action', 'spy']),
-            new Film(1, 'The Hateful Eight', 'Classic Quentin Tarantino sensory indulgence in the wild west', 7.59, 3.8, ['western', 'action']),
-            new Film(2, 'Paddington', 'Furry fun and frosty fridge adventures for all the family', 5.50, 4.2, ['children', 'humour']),
-            new Film(3, 'Jaws', 'Blood-curdling shark fest that spooked a generation', 3.55, 4.1, ['drama', 'shark']),
-            new Film(4, 'Star Wars', 'A long time ago in a galaxy far far away, etc etc etc ...', 8.99, 4.9, ['action', 'spy']),
-            new Film(5, 'The Hunger Games', 'Post apocalyptic action adventure, reality TV with a macabre twist', 9.99, 4.5, ['action', 'teen']),
-            new Film(6, 'The Martian', 'One man\'s determination to survive on the red planet', 7.99, 3.9, ['drama', 'space']),
-            new Film(7, 'Minions', 'Three unlikely minion heroes out to save Minionkind', 6.25, 3.1, ['children', 'animation']),
-            new Film(8, 'Love Actually', 'Heart-warming yarn of love found and lost at Christmastime', 5.99, 5.0, ['romcom', 'chickflick']),
+export class FilmService {
+    getFilms(): Array<Resto> {
+        var restos: Array<Resto> = [
+          new Resto(
+            0,
+            "Nancy Hands Bar & Restaurant",
+            53.348,
+            -6.294,
+            "30 - 32 Parkgate St, Dublin 8, Co. Dublin, Ireland, Arran Quay",
+            "Dublin",
+            ["Irish","Gastropub"],
+            ["** Entrance ** \n Tomato\n** Dish **\n Beef with Fries\n** Desert **\n Banoffe\n","** Entrance ** \n Salad\n** Dish **\n Pork with Fries\n** Desert **\n Yogurt\n"],
+            20.2,
+            4.1),
+          new Resto(
+            1,
+            "Thai Garden Restaurant",
+            53.385,
+            -6.374,
+            "Church Ave, Blanchardstown",
+            "Dublin",
+            ["Classic"],
+            ["** Entrance ** \n Soup\n** Dish **\n Beans\n** Desert **\n Banoffe\n","** Entrance ** \n Salad\n** Dish **\n Pork with Fries\n** Desert **\n Yogurt\n"],
+            25.2,
+            4.6),
+          new Resto(
+            2,
+            "Liberty Grill",
+            51.897,
+            -8.478,
+            "32 Washington St, Centre",
+            "Cork",
+            ["Classic"],
+            ["** Entrance ** \n Soup\n** Dish **\n Beans\n** Desert **\n Banoffe\n","** Entrance ** \n Salad\n** Dish **\n Pork with Fries\n** Desert **\n Yogurt\n"],
+            15.2,
+            4.6),
+
         ];
-        return films;
+        return restos;
     }
 
-    getFilmById(id: number): Film {
+    getRestoById(id: number): Resto {
         return this.getFilms()[id];
     }
-}*/
+}

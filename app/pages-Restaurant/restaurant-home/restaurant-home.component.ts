@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Resto} from '../restaurant-service/restaurant-service';
+import {Resto} from '../../restaurant-service/restaurant-service';
 
 @Component({
     moduleId:     module.id,
@@ -20,7 +20,7 @@ export default class RestaurantHomeComponent implements OnInit, OnDestroy {
         this.subscriberParams = this.route.params.subscribe(params => {
             let id: number = +params['id'];   // (+) converts string 'id' to a number
         });
-        
+
     }
 
     ngOnDestroy() {
