@@ -1,11 +1,11 @@
 "use strict";
 var Resto = (function () {
-    function Resto(id, name, lat, long, adress, city, tag, menu, averagePrice, averageScore) {
+    function Resto(id, name, lat, long, address, city, tag, menu, averagePrice, averageScore) {
         this.id = id;
         this.name = name;
         this.lat = lat;
         this.long = long;
-        this.adress = adress;
+        this.address = address;
         this.city = city;
         this.tag = tag;
         this.menu = menu;

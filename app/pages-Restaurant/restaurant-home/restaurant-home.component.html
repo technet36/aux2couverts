@@ -1,8 +1,10 @@
-<tr>
-  <td>{{resto.Name}}</td>
-  <td></td>
-</tr>
-<tr>
-  <td></td>
-  <td></td>
-</tr>
+<table style="width:100%">
+  <tr>
+    <td>{{resto.name}}</td>
+    <td><osl-restaurant-menu [resto]="resto"></osl-restaurant-menu></td>
+  </tr>
+  <tr>
+    <td><osl-restaurant-location [resto]="resto"></osl-restaurant-location></td>
+    <td>{{resto.averagePrice}}</td>
+  </tr>
+</table>

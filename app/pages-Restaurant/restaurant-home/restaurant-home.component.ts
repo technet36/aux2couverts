@@ -11,16 +11,19 @@ import {Resto,RestoService} from '../../restaurant-service/restaurant-service';
 export default class RestaurantHomeComponent implements OnInit, OnDestroy {
 
     resto: Resto;
+    restoServ: RestoService; //Suppr Router
     subscriberParams: any;
 
-    constructor(private restoService: RestoService, private route: ActivatedRoute) {}
+    //constructor(private restoService: RestoService, private route: ActivatedRoute) {}
+    constructor() {}
 
     ngOnInit() {
-        this.subscriberParams = this.route.params.subscribe(params => {
+        /*this.subscriberParams = this.route.params.subscribe(params => {
             let id: number = +params['id'];   // (+) converts string 'id' to a number
             this.resto = this.restoService.getRestosById(id);
-        });
-
+        });*/
+        this.restoServ = new RestoService()            //Suppr Router
+        this.resto = this.restoServ.getRestosById(0);  //Suppr Router
     }
 
     ngOnDestroy() {

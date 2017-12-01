@@ -9,19 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
 var restaurant_service_1 = require('../../restaurant-service/restaurant-service');
 var RestaurantHomeComponent = (function () {
-    function RestaurantHomeComponent(restoService, route) {
-        this.restoService = restoService;
-        this.route = route;
+    //constructor(private restoService: RestoService, private route: ActivatedRoute) {}
+    function RestaurantHomeComponent() {
     }
     RestaurantHomeComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.subscriberParams = this.route.params.subscribe(function (params) {
-            var id = +params['id']; // (+) converts string 'id' to a number
-            _this.resto = _this.restoService.getRestosById(id);
-        });
+        /*this.subscriberParams = this.route.params.subscribe(params => {
+            let id: number = +params['id'];   // (+) converts string 'id' to a number
+            this.resto = this.restoService.getRestosById(id);
+        });*/
+        this.restoServ = new restaurant_service_1.RestoService(); //Suppr Router
+        this.resto = this.restoServ.getRestosById(0); //Suppr Router
     };
     RestaurantHomeComponent.prototype.ngOnDestroy = function () {
         this.subscriberParams.unsubscribe();
@@ -33,7 +32,7 @@ var RestaurantHomeComponent = (function () {
             templateUrl: 'restaurant-home.component.html',
             providers: [restaurant_service_1.RestoService]
         }), 
-        __metadata('design:paramtypes', [restaurant_service_1.RestoService, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [])
     ], RestaurantHomeComponent);
     return RestaurantHomeComponent;
 }());

@@ -4,7 +4,7 @@ export class Resto {
         public name: string,
         public lat: number,
         public long: number,
-        public adress: string,
+        public address: string,
         public city: string,
         public tag: Array<string>,
         public menu: Array<string>,
