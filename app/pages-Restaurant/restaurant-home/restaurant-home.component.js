@@ -13,6 +13,7 @@ var restaurant_service_1 = require('../../restaurant-service/restaurant-service'
 var RestaurantHomeComponent = (function () {
     //constructor(private restoService: RestoService, private route: ActivatedRoute) {}
     function RestaurantHomeComponent() {
+        this.tagsString = "";
     }
     RestaurantHomeComponent.prototype.ngOnInit = function () {
         /*this.subscriberParams = this.route.params.subscribe(params => {
@@ -21,6 +22,11 @@ var RestaurantHomeComponent = (function () {
         });*/
         this.restoServ = new restaurant_service_1.RestoService(); //Suppr Router
         this.resto = this.restoServ.getRestosById(0); //Suppr Router
+        this.imageUrl = '/images/' + 0 + '.jpg';
+        for (var _i = 0, _a = this.resto.tag; _i < _a.length; _i++) {
+            var t = _a[_i];
+            this.tagsString += t + " * ";
+        }
     };
     RestaurantHomeComponent.prototype.ngOnDestroy = function () {
         this.subscriberParams.unsubscribe();
@@ -30,6 +36,7 @@ var RestaurantHomeComponent = (function () {
             moduleId: module.id,
             selector: 'osl-restaurant-home',
             templateUrl: 'restaurant-home.component.html',
+            styleUrls: ['restaurant-home.component.css'],
             providers: [restaurant_service_1.RestoService]
         }), 
         __metadata('design:paramtypes', [])

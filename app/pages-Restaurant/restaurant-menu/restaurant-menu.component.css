@@ -1,0 +1,22 @@
+span{
+   float:left;
+   padding:12px;
+   }
+.menu{
+   left:12px;
+   top:60px;
+   width :150px;
+   height:250px;
+   background-color:#999999;
+   border:1px solid black;
+   text-align:center;
+   }
+.titre{
+   font-size:14px;
+   background-color:#CC6666;
+   color:#663333;
+   padding:4px;
+   }
+.titre:hover{
+   cursor:pointer;
+   }

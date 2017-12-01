@@ -21,7 +21,8 @@ var RestaurantMenuComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'osl-restaurant-menu',
-            templateUrl: 'restaurant-menu.component.html'
+            templateUrl: 'restaurant-menu.component.html',
+            styleUrls: ['restaurant-menu.component.css'],
         }), 
         __metadata('design:paramtypes', [])
     ], RestaurantMenuComponent);

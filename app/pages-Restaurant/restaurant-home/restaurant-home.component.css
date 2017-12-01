@@ -1,0 +1,9 @@
+.page{
+   background-color:#556B2F;
+   border:1px solid black;
+ }
+
+.titre{
+  float:left;
+  margin-right: 10px;
+}

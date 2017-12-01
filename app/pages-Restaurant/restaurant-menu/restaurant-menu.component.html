@@ -1,1 +1,16 @@
-{{resto.menu}}
+<!--div class= "menu" *ngFor="let menu of resto.menu">
+  <div *ngFor="let m of menu">
+    {{m}}
+  </div>
+</div-->
+<table>
+  <td class= "menu" *ngFor="let menu of resto.menu">
+
+
+        <h1 class="titre">Menu</h1>
+          <div *ngFor="let m of menu">
+            {{m}}<br/> ***** <br/>
+          </div>
+
+  </td>
+</table>

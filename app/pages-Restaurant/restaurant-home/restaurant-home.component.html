@@ -1,10 +1,14 @@
-<table style="width:100%">
+<table class="page" style="width:100%">
   <tr>
-    <td>{{resto.name}}</td>
-    <td><osl-restaurant-menu [resto]="resto"></osl-restaurant-menu></td>
+    <td style="width:70%">
+      <p  class = "titre" ><img src={{imageUrl}}  width="200" height="150 " alt="Image"/></p>
+      <h1>{{resto.name}}</h1>
+      <h3>{{tagsString}}</h3>
+    </td>
+    <td><osl-restaurant-detail [resto]="resto"></osl-restaurant-detail></td>
   </tr>
   <tr>
+    <td><osl-restaurant-menu [resto]="resto"></osl-restaurant-menu></td>
     <td><osl-restaurant-location [resto]="resto"></osl-restaurant-location></td>
-    <td>{{resto.averagePrice}}</td>
   </tr>
 </table>
