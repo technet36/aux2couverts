@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Resto, RestoService} from "../restaurant-service/restaurant-service";
 
-
 @Component({
     moduleId: module.id,
     selector: 'my-form',
@@ -16,13 +15,14 @@ export class SearchFormComponent implements OnInit {
     mesResto: Array<Resto>;
     tags: Array<string>;
     cities: Array<string>;
+
     constructor() {
         this.mesResto = new RestoService().getRestaurants();
         this.inputLocation = "";
         this.inputTag= "";
         this.cities = [];
         this.tags = [];
-        this.results = [];
+        this.results = this.mesResto;
         this.mesResto.forEach(function (unResto) {
             if (!this.cities.includes(unResto.city)) this.cities.push(unResto.city);
             unResto.tag.forEach(function (unTag) {
@@ -33,25 +33,28 @@ export class SearchFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
-            console.log("Init");
+        //TableComponent.
     }
 
     getResult() {
         console.log(this.inputTag);
         console.log(this.inputLocation);
         let isSearch:boolean = false;
+        this.results = [];
         this.mesResto.forEach(function (unResto) {
             isSearch = false;
-            if (this.inputLocation === unResto.city){
+            if (this.inputLocation === unResto.city || this.inputLocation === ""){
                 unResto.tag.forEach(function (unTag) {
-                    if (unTag === this.inputTag){
+                    if (unTag === this.inputTag || this.inputTag === ""){
                         isSearch = true;
                     }
                 },this);
             }
             if (isSearch) this.results.push(unResto);
         },this);
-        console.log(this.results)
+    }
+
+    clickRow(restoId: Number) {
+        console.log("clicked on resto with id :"+restoId);
     }
 }

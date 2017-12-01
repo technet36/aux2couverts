@@ -23,7 +23,7 @@ import {SearchFormComponent} from "./searchForm/searchForm.component";
         ScoreComponent,
         PageNotFoundComponent,
         HomePageComponent,
-        SearchFormComponent
+        SearchFormComponent,
     ],
     bootstrap: [HomePageComponent],
     providers: [LoggerService]

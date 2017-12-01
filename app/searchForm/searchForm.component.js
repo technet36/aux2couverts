@@ -17,7 +17,7 @@ var SearchFormComponent = (function () {
         this.inputTag = "";
         this.cities = [];
         this.tags = [];
-        this.results = [];
+        this.results = this.mesResto;
         this.mesResto.forEach(function (unResto) {
             if (!this.cities.includes(unResto.city))
                 this.cities.push(unResto.city);
@@ -29,17 +29,18 @@ var SearchFormComponent = (function () {
         console.log(this.mesResto);
     }
     SearchFormComponent.prototype.ngOnInit = function () {
-        console.log("Init");
+        //TableComponent.
     };
     SearchFormComponent.prototype.getResult = function () {
         console.log(this.inputTag);
         console.log(this.inputLocation);
         var isSearch = false;
+        this.results = [];
         this.mesResto.forEach(function (unResto) {
             isSearch = false;
-            if (this.inputLocation === unResto.city) {
+            if (this.inputLocation === unResto.city || this.inputLocation === "") {
                 unResto.tag.forEach(function (unTag) {
-                    if (unTag === this.inputTag) {
+                    if (unTag === this.inputTag || this.inputTag === "") {
                         isSearch = true;
                     }
                 }, this);
@@ -47,7 +48,9 @@ var SearchFormComponent = (function () {
             if (isSearch)
                 this.results.push(unResto);
         }, this);
-        console.log(this.results);
+    };
+    SearchFormComponent.prototype.clickRow = function (restoId) {
+        console.log("clicked on resto with id :" + restoId);
     };
     SearchFormComponent = __decorate([
         core_1.Component({

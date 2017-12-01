@@ -13,5 +13,22 @@
             <option *ngFor="let unTag of tags" value="{{unTag}}">{{unTag}}</option>
         </datalist>
     </div>
-    <button id="button_search" class="btn btn-primary" (click)="getResult()">Search</button>
+    <button id="button_search" class="btn btn-primary" (click)="getResult()" >Search</button>
 </div>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>City</th>
+            <th>Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="results.length==0"><td colspan="3" id="no-data">No restaurant found</td></tr>
+        <tr *ngFor="let unResto of results" class="my-rows" (click)="clickRow(unResto.id)" >
+            <td>{{unResto.name}}</td>
+            <td>{{unResto.city}}</td>
+            <td>{{unResto.averageScore}}</td>
+    </tr>
+    </tbody>
+</table>
