@@ -11,15 +11,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var restaurant_service_1 = require("../restaurant-service/restaurant-service");
 var SearchFormComponent = (function () {
-    // Inject HttpClient into your component or service.
     function SearchFormComponent() {
         this.mesResto = new restaurant_service_1.RestoService().getRestaurants();
+        this.inputLocation = "";
+        this.inputTag = "";
+        this.cities = [];
+        this.tags = [];
+        this.results = [];
+        this.mesResto.forEach(function (unResto) {
+            if (!this.cities.includes(unResto.city))
+                this.cities.push(unResto.city);
+            unResto.tag.forEach(function (unTag) {
+                if (!this.tags.includes(unTag))
+                    this.tags.push(unTag);
+            }, this);
+        }, this);
         console.log(this.mesResto);
     }
     SearchFormComponent.prototype.ngOnInit = function () {
         console.log("Init");
     };
     SearchFormComponent.prototype.getResult = function () {
+        console.log(this.inputTag);
+        console.log(this.inputLocation);
+        var isSearch = false;
+        this.mesResto.forEach(function (unResto) {
+            isSearch = false;
+            if (this.inputLocation === unResto.city) {
+                unResto.tag.forEach(function (unTag) {
+                    if (unTag === this.inputTag) {
+                        isSearch = true;
+                    }
+                }, this);
+            }
+            if (isSearch)
+                this.results.push(unResto);
+        }, this);
+        console.log(this.results);
     };
     SearchFormComponent = __decorate([
         core_1.Component({
