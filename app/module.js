@@ -19,6 +19,9 @@ var logger_service_1 = require('./logger-service/logger-service');
 var pagenotfound_component_1 = require('./pagenotfound/pagenotfound.component');
 var homePage_component_1 = require('./homePage/homePage.component');
 var searchForm_component_1 = require("./searchForm/searchForm.component");
+var restaurant_detail_component_1 = require('./pages-Restaurant/restaurant-detail/restaurant-detail.component');
+var restaurant_location_component_1 = require('./pages-Restaurant/restaurant-location/restaurant-location.component');
+var restaurant_menu_component_1 = require('./pages-Restaurant/restaurant-menu/restaurant-menu.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -36,6 +39,9 @@ var AppModule = (function () {
                 pagenotfound_component_1.default,
                 homePage_component_1.default,
                 searchForm_component_1.SearchFormComponent,
+                restaurant_detail_component_1.default,
+                restaurant_location_component_1.default,
+                restaurant_menu_component_1.default
             ],
             bootstrap: [homePage_component_1.default],
             providers: [logger_service_1.LoggerService]
