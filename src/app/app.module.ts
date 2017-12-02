@@ -5,17 +5,20 @@ import { FormsModule } from '@angular/forms';
 
 import { AgmCoreModule } from '@agm/core';
 import {SearchFormComponent} from "./searchForm/searchForm.component";
+import {HttpClientModule} from "@angular/common/http";
+import {RestoService} from "./restaurant-service/restaurant-service";
 
 @NgModule({
   imports: [
     BrowserModule,
+    HttpClientModule,
     CommonModule,
     FormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAqW1hwjAN3wlnU2eD0KVm4LUPzHmPmdBM'
     })
   ],
-  providers: [],
+  providers: [RestoService],
   declarations: [ SearchFormComponent ],
   bootstrap: [ SearchFormComponent ]
 })

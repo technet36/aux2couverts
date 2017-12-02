@@ -14,24 +14,40 @@ export class SearchFormComponent implements OnInit {
     inputLocation: string;
     inputTag: string;
     mesResto: Array<Resto>;
-    tags: Array<string>;
+    tags:Array<Tag>;
     cities: Array<string>;
     markers: Array<Marker>;
     sortDirect:number;
+    initPos:Marker;
 
-    constructor() {
-        this.mesResto = new RestoService().getRestaurants();
+    constructor(private restoService:RestoService) {
+        this.mesResto = this.restoService.getRestaurants();
+        this.results = [];
+        this.initPos = {lng:0,lat:0,restoId:0};
+        if(window.navigator.geolocation){
+          window.navigator.geolocation.getCurrentPosition((pos)=> {
+            this.initPos.lat = pos.coords.latitude;
+            this.initPos.lng = pos.coords.longitude;
+          });
+        }
+
+        this.restoService.getRestos("dublin",135).subscribe(searchedResto=>{
+          this.results=searchedResto;
+        });
+
         this.sortDirect=1;
         this.inputLocation = "";
         this.inputTag= "";
         this.cities = [];
         this.tags = [];
-        this.results = this.mesResto;
+        this.restoService.getAllTags(91).subscribe(data=>{
+            this.tags = data['cuisines'].map(function (eachCuisine) {
+              return eachCuisine['cuisine'];
+            });
+          });
+        //this.results = this.mesResto;
         this.mesResto.forEach(function (unResto) {
             if (!this.cities.includes(unResto.city)) this.cities.push(unResto.city);
-            unResto.tag.forEach(function (unTag) {
-                if (!this.tags.includes(unTag)) this.tags.push(unTag);
-            },this);
         },this);
         //console.log(this.mesResto);
     }
@@ -93,4 +109,8 @@ interface Marker {
   lng: number;
   restoId:number;
   label?: string;
+}
+interface Tag {
+  cuisine_id:number;
+  cuisine_name:string;
 }

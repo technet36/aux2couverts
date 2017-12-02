@@ -1,7 +1,7 @@
 <div class="container-fluid ">
   <div class="row">
     <div class="col-xs-12 col-md-4">
-      <agm-map [latitude]="results[0].lat" [longitude]="results[0].long">
+      <agm-map [latitude]="(initPos.lat)" [longitude]="(initPos.lng)" [zoom]="12">
       <agm-marker *ngFor="let resto of results"  [latitude]="resto.lat" [longitude]="resto.long">
         <agm-info-window>
           <div>{{resto.name}}</div>
@@ -24,7 +24,7 @@
         <div class="form-group col">
           <input id="input_tag" class="form-control" type="text" list="list_tag" placeholder="Tag" [(ngModel)]="inputTag">
           <datalist id="list_tag" >
-            <option *ngFor="let unTag of tags" value="{{unTag}}">{{unTag}}</option>
+            <option *ngFor="let unTag of tags" value="{{unTag.cuisine_name}}"></option>
           </datalist>
         </div>
         <button id="button_search" class="btn btn-primary form-control" (click)="getResult()" >Search</button>

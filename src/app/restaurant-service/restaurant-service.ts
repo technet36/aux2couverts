@@ -1,10 +1,14 @@
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Injectable} from "@angular/core";
+import {Observable} from "rxjs/Observable";
+
 export class Resto {
     constructor(
         public id: number,
         public name: string,
         public lat: number,
         public long: number,
-        public adress: string,
+        public address: string,
         public city: string,
         public tag: Array<string>,
         public menu: Array<string>,
@@ -12,8 +16,15 @@ export class Resto {
         public averageScore: number) {}
 }
 
+@Injectable()
 export class RestoService {
-    getRestaurants(): Array<Resto> {
+
+  private header:HttpHeaders = new HttpHeaders("user-key:3312c04b34aebdde5a1e322d74150b17");
+  private apiBase:string ="https://developers.zomato.com/api/v2.1/";
+
+  constructor(private http:HttpClient){ }
+
+  getRestaurants(): Array<Resto> {
         var restos: Array<Resto> = [
           new Resto(
             0,
@@ -53,7 +64,50 @@ export class RestoService {
         return restos;
     }
 
-    getRestosById(id: number): Resto {
-      return this.getRestaurants()[id];
-    }
+  public getRestos(cityQuery:string,tagId:number):Observable<Resto[]>{
+
+    return new Observable((observer)=>{
+    this.http.get(this.apiBase+"locations?query="+cityQuery,{headers:this.header}).subscribe(
+      value=>{
+        let cityId = value["location_suggestions"][0]["city_id"];
+        this.http.get(this.apiBase+"search?entity_id="+cityId+"&entity_type=city&cuisines="+tagId,{headers:this.header}).subscribe(
+          values=>{
+            let restos:Array<Resto>=[];
+            values["restaurants"].forEach(function (unResto) {
+              restos.push(new Resto(
+                unResto["restaurant"]["R"]["res_id"],
+                unResto["restaurant"]["name"],
+                parseFloat(unResto["restaurant"]["location"]["latitude"]),
+                parseFloat(unResto["restaurant"]["location"]["longitude"]),
+                unResto["restaurant"]["location"]["address"],
+                unResto["restaurant"]["location"]["city"],
+                unResto["restaurant"]["cuisines"].split(", "),
+                [unResto["restaurant"]["menu_url"]]  ,
+                unResto["restaurant"]["average_cost_for_two"]/2,
+                unResto["restaurant"]["user_rating"]["aggregate_rating"]));
+            });
+
+            observer.next(restos);
+            observer.complete();
+          },()=>{
+            observer.error([]);
+          }
+        );
+      },()=>{
+        observer.error([]);
+      }
+    );
+  });
+  }
+
+  getAllTags(a:number,b?:number):Observable<Object>{
+      if(b){
+        //return ["Classic","Irish"];
+      }else{
+        return this.http.get(this.apiBase+"cuisines?city_id=91",{headers:this.header});
+      }
+  }
+  getRestosById(id: number): Resto {
+    return this.getRestaurants()[id];
+  }
 }
