@@ -12,13 +12,16 @@ var forms_1 = require('@angular/forms');
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var platform_browser_1 = require('@angular/platform-browser');
+var homePage_component_1 = require('./homePage/homePage.component');
+var searchForm_component_1 = require("./searchForm/searchForm.component");
+var application_component_1 = require('./application/application.component');
 var footer_component_1 = require('./footer/footer.component');
 var menubar_component_1 = require('./menubar/menubar.component');
 var score_component_1 = require('./score/score.component');
 var logger_service_1 = require('./logger-service/logger-service');
+var about_component_1 = require('./about/about.component');
 var pagenotfound_component_1 = require('./pagenotfound/pagenotfound.component');
-var homePage_component_1 = require('./homePage/homePage.component');
-var searchForm_component_1 = require("./searchForm/searchForm.component");
+var restaurant_home_component_1 = require('./pages-Restaurant/restaurant-home/restaurant-home.component');
 var restaurant_detail_component_1 = require('./pages-Restaurant/restaurant-detail/restaurant-detail.component');
 var restaurant_location_component_1 = require('./pages-Restaurant/restaurant-location/restaurant-location.component');
 var restaurant_menu_component_1 = require('./pages-Restaurant/restaurant-menu/restaurant-menu.component');
@@ -29,21 +32,27 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule,
                 router_1.RouterModule.forRoot([
-                    { path: '**', component: pagenotfound_component_1.default }
+                    { path: '', component: homePage_component_1.default },
+                    { path: 'restaurant/:id', component: restaurant_home_component_1.default, data: { displayPrice: true } },
+                    { path: '**', component: pagenotfound_component_1.default },
+                    { path: 'about', component: about_component_1.default }
                 ])
             ],
             declarations: [
-                footer_component_1.default,
-                menubar_component_1.default,
-                score_component_1.default,
-                pagenotfound_component_1.default,
-                homePage_component_1.default,
+                application_component_1.default,
                 searchForm_component_1.SearchFormComponent,
+                footer_component_1.default,
+                about_component_1.default,
+                menubar_component_1.default,
+                homePage_component_1.default,
+                restaurant_home_component_1.default,
                 restaurant_detail_component_1.default,
                 restaurant_location_component_1.default,
-                restaurant_menu_component_1.default
+                restaurant_menu_component_1.default,
+                score_component_1.default,
+                pagenotfound_component_1.default
             ],
-            bootstrap: [homePage_component_1.default],
+            bootstrap: [application_component_1.default],
             providers: [logger_service_1.LoggerService]
         }), 
         __metadata('design:paramtypes', [])

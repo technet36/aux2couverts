@@ -18,16 +18,16 @@ var RestaurantHomeComponent = (function () {
         this.tagsString = "";
     }
     RestaurantHomeComponent.prototype.ngOnInit = function () {
-        /*this.subscriberParams = this.route.params.subscribe(params => {
-            let id: number = +params['id'];   // (+) converts string 'id' to a number
-            this.resto = this.restoService.getRestosById(id);
-<<<<<<< HEAD
+        var _this = this;
+        this.subscriberParams = this.route.params.subscribe(function (params) {
+            var id = +params['id']; // (+) converts string 'id' to a number
+            _this.resto = _this.restoService.getRestosById(id);
+            _this.imageUrl = '/images/' + id + '.jpg';
         });
-=======
-        });*/
-        this.restoServ = new restaurant_service_1.RestoService(); //Suppr Router
-        this.resto = this.restoServ.getRestosById(0); //Suppr Router
-        this.imageUrl = '/images/' + 0 + '.jpg';
+        this.subscriberData = this.route.data.subscribe(function (data) {
+            _this.displayPrice = data['displayPrice'];
+        });
+        //Display Array Tags
         for (var _i = 0, _a = this.resto.tag; _i < _a.length; _i++) {
             var t = _a[_i];
             this.tagsString += t + " * ";
@@ -35,12 +35,14 @@ var RestaurantHomeComponent = (function () {
     };
     RestaurantHomeComponent.prototype.ngOnDestroy = function () {
         this.subscriberParams.unsubscribe();
+        this.subscriberData.unsubscribe();
     };
     RestaurantHomeComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'osl-restaurant-home',
             templateUrl: 'restaurant-home.component.html',
+            styleUrls: ['restaurant-home.component.css'],
             providers: [restaurant_service_1.RestoService]
         }), 
         __metadata('design:paramtypes', [restaurant_service_1.RestoService, router_1.ActivatedRoute])
