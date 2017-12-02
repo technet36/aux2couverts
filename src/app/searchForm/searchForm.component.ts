@@ -9,8 +9,9 @@ import {Resto, RestoService} from "../restaurant-service/restaurant-service";
 
 })
 export class SearchFormComponent implements OnInit {
+  theTag: Tag;
 
-    results: Array<Resto>;
+  results: Array<Resto>;
     inputLocation: string;
     inputTag: string;
     mesResto: Array<Resto>;
@@ -34,7 +35,7 @@ export class SearchFormComponent implements OnInit {
         this.restoService.getRestos("dublin",135).subscribe(searchedResto=>{
           this.results=searchedResto;
         });
-
+        this.theTag = {cuisine_id:135,cuisine_name:"Irish"};
         this.sortDirect=1;
         this.inputLocation = "";
         this.inputTag= "";
@@ -60,21 +61,14 @@ export class SearchFormComponent implements OnInit {
         let isSearch:boolean = false;
         this.results = [];
         this.markers = [];
-        this.mesResto.forEach(function (unResto) {
-            isSearch = false;
-            if (this.inputLocation === unResto.city || this.inputLocation === ""){
-                unResto.tag.forEach(function (unTag) {
-                    if (unTag === this.inputTag || this.inputTag === ""){
-                        isSearch = true;
-                    }
-                },this);
-            }
-            if (isSearch) {
-              this.results.push(unResto);
-              let restoMarker:Marker = {lat:unResto.lat,lng:unResto.long, restoId:unResto.id,label:unResto.name};
-              this.markers.push(restoMarker);
-            }
-        },this);
+        this.theTag = {cuisine_id:0,cuisine_name:"none"};
+        //this.theTag = this.tags.find(tag=>tag.cuisine_name===this.inputTag);
+console.log("thTag");
+console.log(this.theTag);
+      this.restoService.getRestos(this.inputLocation,this.theTag.cuisine_id).subscribe(searchedResto=>{
+        this.results=searchedResto;
+      });
+
     }
 
     sortByName(that){

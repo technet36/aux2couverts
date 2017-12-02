@@ -11,7 +11,8 @@ export class Resto {
         public address: string,
         public city: string,
         public tag: Array<string>,
-        public menu: Array<string>,
+        public menu: Array<Array<string>>,
+        public menuUrl: string,
         public averagePrice: number,
         public averageScore: number) {}
 }
@@ -19,48 +20,17 @@ export class Resto {
 @Injectable()
 export class RestoService {
 
+
+  private mesRestaurants:Array<Resto>;
   private header:HttpHeaders = new HttpHeaders("user-key:3312c04b34aebdde5a1e322d74150b17");
   private apiBase:string ="https://developers.zomato.com/api/v2.1/";
 
-  constructor(private http:HttpClient){ }
+  constructor(private http:HttpClient){
+    this.mesRestaurants=[];
+  }
 
   getRestaurants(): Array<Resto> {
-        var restos: Array<Resto> = [
-          new Resto(
-            0,
-            "Nancy Hands Bar & Restaurant",
-            53.348,
-            -6.294,
-            "30 - 32 Parkgate St, Dublin 8, Co. Dublin, Ireland, Arran Quay",
-            "Dublin",
-            ["Irish","Gastropub"],
-            ["** Entrance ** \n Tomato\n** Dish **\n Beef with Fries\n** Desert **\n Banoffe\n","** Entrance ** \n Salad\n** Dish **\n Pork with Fries\n** Desert **\n Yogurt\n"],
-            20.2,
-            4.1),
-          new Resto(
-            1,
-            "Thai Garden Restaurant",
-            53.385,
-            -6.374,
-            "Church Ave, Blanchardstown",
-            "Dublin",
-            ["Classic"],
-            ["** Entrance ** \n Soup\n** Dish **\n Beans\n** Desert **\n Banoffe\n","** Entrance ** \n Salad\n** Dish **\n Pork with Fries\n** Desert **\n Yogurt\n"],
-            25.2,
-            4.6),
-          new Resto(
-            2,
-            "Liberty Grill",
-            51.897,
-            -8.478,
-            "32 Washington St, Centre",
-            "Cork",
-            ["Classic"],
-            ["** Entrance ** \n Soup\n** Dish **\n Beans\n** Desert **\n Banoffe\n","** Entrance ** \n Salad\n** Dish **\n Pork with Fries\n** Desert **\n Yogurt\n"],
-            15.2,
-            4.6),
-
-        ];
+        var restos: Array<Resto> = [];
         return restos;
     }
 
@@ -70,11 +40,14 @@ export class RestoService {
     this.http.get(this.apiBase+"locations?query="+cityQuery,{headers:this.header}).subscribe(
       value=>{
         let cityId = value["location_suggestions"][0]["city_id"];
-        this.http.get(this.apiBase+"search?entity_id="+cityId+"&entity_type=city&cuisines="+tagId,{headers:this.header}).subscribe(
+        let urlString = this.apiBase;
+        console.log("cityQuery :"+cityQuery+" || tagId:"+tagId);
+        if(cityQuery!=="" && tagId!==0){}
+        this.http.get(this.apiBase+"search?entity_id="+cityId+"&entity_type=city&cuisines="+tagId+"&sort=rating&order=desc",{headers:this.header}).subscribe(
           values=>{
-            let restos:Array<Resto>=[];
+            this.mesRestaurants=[];
             values["restaurants"].forEach(function (unResto) {
-              restos.push(new Resto(
+              this.mesRestaurants.push(new Resto(
                 unResto["restaurant"]["R"]["res_id"],
                 unResto["restaurant"]["name"],
                 parseFloat(unResto["restaurant"]["location"]["latitude"]),
@@ -82,12 +55,13 @@ export class RestoService {
                 unResto["restaurant"]["location"]["address"],
                 unResto["restaurant"]["location"]["city"],
                 unResto["restaurant"]["cuisines"].split(", "),
-                [unResto["restaurant"]["menu_url"]]  ,
+                [["Soup","Beans","Banoffe"],["Salad","Pork with Fries","Yogurt"]] ,
+                unResto["restaurant"]["menu_url"],
                 unResto["restaurant"]["average_cost_for_two"]/2,
                 unResto["restaurant"]["user_rating"]["aggregate_rating"]));
-            });
-
-            observer.next(restos);
+            },this);
+            console.log(this.mesRestaurants);
+            observer.next(this.mesRestaurants);
             observer.complete();
           },()=>{
             observer.error([]);
@@ -107,7 +81,32 @@ export class RestoService {
         return this.http.get(this.apiBase+"cuisines?city_id=91",{headers:this.header});
       }
   }
-  getRestosById(id: number): Resto {
-    return this.getRestaurants()[id];
+  getRestosById(id: number):Observable<Resto> {
+    console.log("getResto");
+    //console.log(this.mesRestaurants);
+
+      return new Observable((monObserver)=>{
+        this.http.get(this.apiBase+"restaurant?res_id=195",{headers:this.header}).subscribe(
+        unResto=>{
+          console.log("test");
+          let leResto:Resto= new Resto(
+              unResto["R"]["res_id"],
+              unResto["name"],
+              parseFloat(unResto["location"]["latitude"]),
+              parseFloat(unResto["location"]["longitude"]),
+              unResto["location"]["address"],
+              unResto["location"]["city"],
+              unResto["cuisines"].split(", "),
+              [["Soup","Beans","Banoffe"],["Salad","Pork with Fries","Yogurt"]] ,
+              unResto["menu_url"],
+              unResto["average_cost_for_two"]/2,
+              unResto["user_rating"]["aggregate_rating"]);
+          console.log(leResto);
+          monObserver.next(leResto);
+          monObserver.complete();
+        },()=>{
+            monObserver.error([]);
+        });
+      });
   }
 }

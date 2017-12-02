@@ -1,12 +1,12 @@
 <div class="container-fluid ">
   <div class="row">
     <div class="col-xs-12 col-md-4">
-      <agm-map [latitude]="(initPos.lat)" [longitude]="(initPos.lng)" [zoom]="12">
+      <agm-map [latitude]="(initPos.lat)" [longitude]="(initPos.lng)" [zoom]="11">
       <agm-marker *ngFor="let resto of results"  [latitude]="resto.lat" [longitude]="resto.long">
         <agm-info-window>
           <div>{{resto.name}}</div>
           <div>Rate :{{resto.averageScore}}</div>
-          <a href="#">+details</a>
+          <a [routerLink]="['/restaurant', resto.id]">+details</a>
         </agm-info-window>
       </agm-marker>
     </agm-map>
@@ -40,7 +40,7 @@
           </thead>
           <tbody>
           <tr *ngIf="results.length==0"><td colspan="3" id="no-data">No restaurant found</td></tr>
-          <tr *ngFor="let unResto of results" class="my-rows" (click)="clickRow(unResto.id)" >
+          <tr *ngFor="let unResto of results" class="my-rows" [routerLink]="['/restaurant', unResto.id]" >
             <td>{{unResto.name}}</td>
             <td>{{unResto.city}}</td>
             <td>{{unResto.averageScore}}</td>
