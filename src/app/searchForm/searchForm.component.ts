@@ -62,9 +62,10 @@ export class SearchFormComponent implements OnInit {
         this.results = [];
         this.markers = [];
         this.theTag = {cuisine_id:0,cuisine_name:"none"};
-        //this.theTag = this.tags.find(tag=>tag.cuisine_name===this.inputTag);
-console.log("thTag");
-console.log(this.theTag);
+        this.theTag = this.tags.find(tag=>{
+          return tag.cuisine_name===this.inputTag;
+        });
+
       this.restoService.getRestos(this.inputLocation,this.theTag.cuisine_id).subscribe(searchedResto=>{
         this.results=searchedResto;
       });

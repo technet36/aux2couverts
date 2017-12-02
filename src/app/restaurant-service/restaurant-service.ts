@@ -82,13 +82,10 @@ export class RestoService {
       }
   }
   getRestosById(id: number):Observable<Resto> {
-    console.log("getResto");
-    //console.log(this.mesRestaurants);
 
       return new Observable((monObserver)=>{
-        this.http.get(this.apiBase+"restaurant?res_id=195",{headers:this.header}).subscribe(
+        this.http.get(this.apiBase+"restaurant?res_id="+id,{headers:this.header}).subscribe(
         unResto=>{
-          console.log("test");
           let leResto:Resto= new Resto(
               unResto["R"]["res_id"],
               unResto["name"],
@@ -101,7 +98,6 @@ export class RestoService {
               unResto["menu_url"],
               unResto["average_cost_for_two"]/2,
               unResto["user_rating"]["aggregate_rating"]);
-          console.log(leResto);
           monObserver.next(leResto);
           monObserver.complete();
         },()=>{
