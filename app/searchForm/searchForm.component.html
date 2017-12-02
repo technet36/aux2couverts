@@ -25,8 +25,8 @@
     </thead>
     <tbody>
         <tr *ngIf="results.length==0"><td colspan="3" id="no-data">No restaurant found</td></tr>
-        <tr *ngFor="let unResto of results" class="my-rows" (click)="clickRow(unResto.id)" >
-            <td>{{unResto.name}}</td>
+        <tr *ngFor="let unResto of results" class="my-rows" >
+            <td><a [routerLink]="['/restaurant', unResto.id]">{{unResto.name}}</a></td>
             <td>{{unResto.city}}</td>
             <td>{{unResto.averageScore}}</td>
     </tr>
