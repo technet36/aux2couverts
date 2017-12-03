@@ -71,6 +71,10 @@ export class SearchFormComponent implements OnInit {
 
       this.restoService.getRestos(this.inputLocation,this.theTag.cuisine_id).subscribe(searchedResto=>{
         this.results=searchedResto;
+        if (searchedResto.length ){
+          this.initPos.lat = searchedResto[0].lat;
+          this.initPos.lng = searchedResto[0].long;
+        }
       });
 
     }
