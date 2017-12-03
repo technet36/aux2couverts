@@ -48,14 +48,14 @@ var SearchFormComponent = (function () {
         }, this);
     };
     SearchFormComponent.prototype.clickRow = function (restoId) {
-        console.log("clicked on resto with id :" + restoId);
+        //console.log("clicked on resto with id :" + restoId);
     };
     SearchFormComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'my-form',
             templateUrl: 'searchForm.component.html'
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], SearchFormComponent);
     return SearchFormComponent;

@@ -1,25 +1,13 @@
 span{
    float:left;
    padding:12px;
-   }
-.menupp{
-   left:12px;
-   top:60px;
-   width :150px;
-   height:250px;
-   background-color:#999999;
-   border:1px solid black;
-   text-align:center;
-   }
+}
 .titre{
    font-size:14px;
    background-color:#CC6666;
    color:#663333;
    padding:4px;
-   }
-.titre:hover{
-   cursor:pointer;
-   }
+}
 .menu-table{
   border: solid dimgray 2px;
   height: 250px;
@@ -30,7 +18,6 @@ span{
   text-align: center;
   padding: 5px;
 }
-
 .menu-table tbody{
   background-color: rgba(225, 225, 225, 0.6);
   padding: 5px;

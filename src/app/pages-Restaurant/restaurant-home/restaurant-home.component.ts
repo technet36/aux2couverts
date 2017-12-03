@@ -29,12 +29,6 @@ export default class RestaurantHomeComponent implements OnInit, OnDestroy {
               console.log("LeResto");
               console.log(leResto);
               this.resto=leResto;
-
-              //Display Array Tags
-              for (let t of this.resto.tag)
-              {
-                this.tagsString += t + " * ";
-              }
             });
             this.imageUrl = 'assets/' + id%6 + '.jpg';
         });

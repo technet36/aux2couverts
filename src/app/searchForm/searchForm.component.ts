@@ -97,7 +97,7 @@ export class SearchFormComponent implements OnInit {
     }
 
   clickRow(restoId: Number) {
-        console.log("clicked on resto with id :"+restoId);
+        //console.log("clicked on resto with id :"+restoId);
     }
 
 }

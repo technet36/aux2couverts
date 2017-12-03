@@ -19,6 +19,8 @@ import RestaurantMenuComponent from "./pages-Restaurant/restaurant-menu/restaura
 import ScoreComponent from "./score/score.component";
 import PageNotFoundComponent from "./pagenotfound/pagenotfound.component";
 import {LoggerService} from "./logger-service/logger-service";
+import ReviewComponent from "./pages-Restaurant/review/review.component";
+import {ReviewService} from "./review-service/review-service.service";
 
 @NgModule({
   imports: [
@@ -36,7 +38,7 @@ import {LoggerService} from "./logger-service/logger-service";
       { path: 'donate', component: AboutComponent  }
     ])
   ],
-  providers: [RestoService,LoggerService],
+  providers: [RestoService,LoggerService,ReviewService],
   declarations: [
     SearchFormComponent,
     ApplicationComponent,
@@ -48,7 +50,8 @@ import {LoggerService} from "./logger-service/logger-service";
     RestaurantLocationComponent,
     RestaurantMenuComponent,
     ScoreComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ReviewComponent
   ],
   bootstrap: [ ApplicationComponent ]
 })

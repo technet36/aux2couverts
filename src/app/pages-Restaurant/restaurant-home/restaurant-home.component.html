@@ -17,8 +17,11 @@
     <div class="col-xs-12 col-md-1"></div>
   </div>
   <div class="row">
-    <div class="col-xs-12 col-md-6 offset-xs-0 offset-md-1">
+    <div class="col-xs-12 col-md-3 offset-xs-0 offset-md-1">
       <osl-restaurant-menu [resto]="resto"></osl-restaurant-menu>
+    </div>
+    <div class="col-xs-12 col-md-3">
+      <osl-review [resto_id]="resto.id"></osl-review>
     </div>
     <div class="col-xs 12 col-md-4">
       <osl-restaurant-location [resto]="resto"></osl-restaurant-location>

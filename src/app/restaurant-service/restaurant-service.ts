@@ -42,7 +42,7 @@ export class RestoService {
       value=>{
         let cityId = value["location_suggestions"][0]["city_id"];
         let urlString = this.apiBase+"search?sort=rating&order=desc";
-        console.log("cityQuery :|"+cityQuery+"| "+cityId+" || tagId:"+tagId);
+        //console.log("cityQuery :|"+cityQuery+"| "+cityId+" || tagId:"+tagId);
         if(cityQuery!==""){
           urlString = urlString+"&entity_id="+cityId+"&entity_type=city";
         }
@@ -68,7 +68,7 @@ export class RestoService {
                 ["11h - 13h","17h - 22h"],
                 "40 pers."));
             },this);
-            console.log(this.mesRestaurants);
+            //console.log(this.mesRestaurants);
             observer.next(this.mesRestaurants);
             observer.complete();
           },()=>{
