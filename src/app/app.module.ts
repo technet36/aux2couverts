@@ -33,7 +33,7 @@ import {LoggerService} from "./logger-service/logger-service";
       { path: '', component: SearchFormComponent },
       { path: 'restaurant/:id', component: RestaurantHomeComponent, data: {displayPrice: true}  },
       { path: '**', component: PageNotFoundComponent },
-      { path: 'about', component: AboutComponent  }
+      { path: 'donate', component: AboutComponent  }
     ])
   ],
   providers: [RestoService,LoggerService],

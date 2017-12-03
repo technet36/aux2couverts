@@ -1,7 +1,7 @@
-<div class="container-fluid ">
-  <div class="row">
-    <div class="col-xs-12 col-md-4">
-      <agm-map [latitude]="(initPos.lat)" [longitude]="(initPos.lng)" [zoom]="11">
+<div class="container-fluid">
+  <div class="row ">
+    <div class="col-xs-12 col-md-6">
+      <agm-map class="search-agm-map" [latitude]="(initPos.lat)" [longitude]="(initPos.lng)" [zoom]="11">
       <agm-marker *ngFor="let resto of results"  [latitude]="resto.lat" [longitude]="resto.long">
         <agm-info-window>
           <div>{{resto.name}}</div>
@@ -10,9 +10,8 @@
         </agm-info-window>
       </agm-marker>
     </agm-map>
-
     </div>
-    <div class="col-xs-12 col-md-8">
+    <div class="col-xs-12 col-md-6">
       <div class="row"><h2 class="mx-auto">Search the restaurant you need</h2></div>
       <div class="row form-row mx-auto my-boxes col-xs-12 col-lg-8 offset-lg-2">
         <div class="form-group col">
@@ -30,7 +29,8 @@
         <button id="button_search" class="btn btn-primary form-control" (click)="getResult()" >Search</button>
       </div>
       <hr>
-      <table class="my-boxes table table-bordered table-hover">
+      <div class="table-wrapper my-boxes" >
+        <table class="table my-table table-hover">
           <thead>
           <tr>
             <th (click)="sortByName(this)">Name</th>
@@ -47,6 +47,7 @@
           </tr>
           </tbody>
         </table>
+      </div>
     </div>
   </div>
 </div>

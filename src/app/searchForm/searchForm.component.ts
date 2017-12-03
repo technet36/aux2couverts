@@ -61,10 +61,13 @@ export class SearchFormComponent implements OnInit {
         let isSearch:boolean = false;
         this.results = [];
         this.markers = [];
-        this.theTag = {cuisine_id:0,cuisine_name:"none"};
         this.theTag = this.tags.find(tag=>{
           return tag.cuisine_name===this.inputTag;
         });
+
+        if (typeof (this.theTag) === "undefined"){
+          this.theTag = {cuisine_id:0,cuisine_name:"none"};
+        }
 
       this.restoService.getRestos(this.inputLocation,this.theTag.cuisine_id).subscribe(searchedResto=>{
         this.results=searchedResto;

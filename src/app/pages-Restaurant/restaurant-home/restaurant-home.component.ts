@@ -22,7 +22,7 @@ export default class RestaurantHomeComponent implements OnInit, OnDestroy {
     constructor(private restoService: RestoService, private route: ActivatedRoute) {}
 
     ngOnInit() {
-        this.resto = new Resto(0,"",53.348,-6.294,"","",[],[],"",0.0,0.0);
+        this.resto = new Resto(0,"",53.348,-6.294,"","",[],[],"",0.0,0.0,[],"");
         this.subscriberParams = this.route.params.subscribe(params => {
             let id: number = +params['id'];   // (+) converts string 'id' to a number
             this.restoService.getRestosById(id).subscribe(leResto=>{
@@ -36,7 +36,7 @@ export default class RestaurantHomeComponent implements OnInit, OnDestroy {
                 this.tagsString += t + " * ";
               }
             });
-            this.imageUrl = '/images/' + id%6 + '.jpg';
+            this.imageUrl = 'assets/' + id%6 + '.jpg';
         });
 
         this.subscriberData = this.route.data.subscribe(data => {

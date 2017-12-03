@@ -14,7 +14,9 @@ export class Resto {
         public menu: Array<Array<string>>,
         public menuUrl: string,
         public averagePrice: number,
-        public averageScore: number) {}
+        public averageScore: number,
+        public openingHours:Array<string>,
+        public facilities:string) {}
 }
 
 @Injectable()
@@ -35,15 +37,19 @@ export class RestoService {
     }
 
   public getRestos(cityQuery:string,tagId:number):Observable<Resto[]>{
-
     return new Observable((observer)=>{
     this.http.get(this.apiBase+"locations?query="+cityQuery,{headers:this.header}).subscribe(
       value=>{
         let cityId = value["location_suggestions"][0]["city_id"];
-        let urlString = this.apiBase;
-        console.log("cityQuery :"+cityQuery+" || tagId:"+tagId);
-        if(cityQuery!=="" && tagId!==0){}
-        this.http.get(this.apiBase+"search?entity_id="+cityId+"&entity_type=city&cuisines="+tagId+"&sort=rating&order=desc",{headers:this.header}).subscribe(
+        let urlString = this.apiBase+"search?sort=rating&order=desc";
+        console.log("cityQuery :|"+cityQuery+"| "+cityId+" || tagId:"+tagId);
+        if(cityQuery!==""){
+          urlString = urlString+"&entity_id="+cityId+"&entity_type=city";
+        }
+        if(tagId!=0){
+          urlString = urlString+"&cuisines="+tagId;
+        }
+        this.http.get(urlString,{headers:this.header}).subscribe(
           values=>{
             this.mesRestaurants=[];
             values["restaurants"].forEach(function (unResto) {
@@ -58,7 +64,9 @@ export class RestoService {
                 [["Soup","Beans","Banoffe"],["Salad","Pork with Fries","Yogurt"]] ,
                 unResto["restaurant"]["menu_url"],
                 unResto["restaurant"]["average_cost_for_two"]/2,
-                unResto["restaurant"]["user_rating"]["aggregate_rating"]));
+                unResto["restaurant"]["user_rating"]["aggregate_rating"],
+                ["11h - 13h","17h - 22h"],
+                "40 pers."));
             },this);
             console.log(this.mesRestaurants);
             observer.next(this.mesRestaurants);
@@ -97,7 +105,9 @@ export class RestoService {
               [["Soup","Beans","Banoffe"],["Salad","Pork with Fries","Yogurt"]] ,
               unResto["menu_url"],
               unResto["average_cost_for_two"]/2,
-              unResto["user_rating"]["aggregate_rating"]);
+              unResto["user_rating"]["aggregate_rating"],
+              ["11h - 13h","17h - 22h"],
+              "40 pers.");
           monObserver.next(leResto);
           monObserver.complete();
         },()=>{
